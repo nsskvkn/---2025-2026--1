@@ -1,5 +1,4 @@
-#include <iostream>
-#include "Triangle.h"
+#include <iostream> 
 #include <cmath> // для sqrt
 
 using namespace std;
@@ -13,10 +12,29 @@ public:
     }
     
     Triangle(double a1, double b1, double a2, double b2, double a3, double b3) {
-        
         x1 = a1; y1 = b1;
         x2 = a2; y2 = b2;
         x3 = a3; y3 = b3;
+    }
+
+    // Конструктор копіювання
+    Triangle(const Triangle& t) {
+        x1 = t.x1; y1 = t.y1;
+        x2 = t.x2; y2 = t.y2;
+        x3 = t.x3; y3 = t.y3;
+    }
+
+    // Конструктор переміщення
+    Triangle(Triangle&& t) noexcept {
+        x1 = t.x1; y1 = t.y1;
+        x2 = t.x2; y2 = t.y2;
+        x3 = t.x3; y3 = t.y3;
+        
+        t.x1 = t.y1 = t.x2 = t.y2 = t.x3 = t.y3 = 0;
+    }
+    
+    // Деструктор
+    ~Triangle() {
     }
     
     double getPerimeter() {

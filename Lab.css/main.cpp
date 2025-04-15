@@ -9,7 +9,10 @@ int main() {
     cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
     
     Triangle tri(x1, y1, x2, y2, x3, y3);
-    
+
+    Triangle tri1();
+
+    Triangle tri2(tri1);
     cout << "\tТочки трикутника:\n";
     cout << " A: (" << tri.getX1() << ", " << tri.getY1();
     cout << " B: (" << tri.getX2() << ", " << tri.getY2();
