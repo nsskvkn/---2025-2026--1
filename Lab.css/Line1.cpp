@@ -1,35 +1,54 @@
-// line.cpp
-#include <string>
-#include <algorithm> // для sort
-using namespace std;
+#include "Line.h"
+#include <cstring>
+#include <cctype>
+#include <algorithm>
 
-class Line {
-protected:
-    string text; 
+Line::Line(const char* t) {
+    text = t;
+}
 
-public:
-    // Конструктор без параметрів
-    Line() : text("") {}
+Line::~Line() {}
 
-    // Конструктор з параметром (ініціалізує текст)
-    Line(const string &text) : text(text) {}
+const char* Line::getText() {
+    return text;
+}
 
-    // Копіюючий конструктор
-    Line(const Line &other) : text(other.text) {}
+int Line::getLength() {
+    return strlen(text);
+}
 
-    // Метод для отримання тексту (геттер)
-    string getText() const { return text; }
+void Line::sortText(char* result) {
+    strcpy(result, text);
+    std::sort(result, result + strlen(result));
+}
 
-    // Метод для обчислення довжини тексту
-    virtual int calculateLength() const {
-        return static_cast<int>(text.length());
+UpperLine::UpperLine(const char* t) : Line(t) {}
+
+int UpperLine::getLength() {
+    return strlen(text);
+}
+
+void UpperLine::sortText(char* result) {
+    int len = strlen(text);
+    for (int i = 0; i < len; i++) {
+        result[i] = std::toupper(text[i]);
     }
+    result[len] = '\0';
+    std::sort(result, result + len);
+}
 
-    // Метод для сортування символів у рядку
-    virtual string getProcessedString() const {
-        string result = text;
-        sort(result.begin(), result.end()); // сортуємо за зростанням
-        return result;
+LowerLine::LowerLine(const char* t) : Line(t) {}
+
+int LowerLine::getLength() {
+    return strlen(text);
+}
+
+void LowerLine::sortText(char* result) {
+    int len = strlen(text);
+    for (int i = 0; i < len; i++) {
+        result[i] = std::tolower(text[i]);
     }
-
-};
+    result[len] = '\0';
+    std::sort(result, result + len);
+    std::reverse(result, result + len);
+}
