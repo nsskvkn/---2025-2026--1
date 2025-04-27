@@ -1,22 +1,25 @@
 #include <iostream>
-#include "Line.h"
+#include "Strings.h"
 
-using namespace std;
+using namespace std; 
+
+// Демонстрація поліморфізму
+void processString(Strings* strObj) {
+    cout << "Початковий рядок: " << strObj->getStr() << endl;
+    cout << "Довжина: " << strObj->calculateLength() << endl;
+    
+    strObj->sortString();
+    cout << "Відсортований рядок: " << strObj->getStr();
+}
 
 int main() {
-    Line line1("....");
-    UpperLine line2(".....");
-    LowerLine line3(".....");
+    UpperCaseString upper("HelloWorld");
+    LowerCaseString lower("PolyMorphism");
 
-    Line* lines[3] = { &line1, &line2, &line3 };
+    Strings* strings[] = { &upper, &lower };
 
-    char buffer[100];
-
-    for (int i = 0; i < 3; i++) {
-        cout << lines[i]->getText() << "\n";
-        cout << lines[i]->getLength() << "\n";
-        lines[i]->sortText(buffer);
-        cout << buffer << "\n";
+    for (auto* str : strings) {
+        processString(str);
     }
 
     return 0;

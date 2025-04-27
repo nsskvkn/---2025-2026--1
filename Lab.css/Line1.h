@@ -1,29 +1,32 @@
-#ifndef LINE_H
-#define LINE_H
+#ifndef STRINGS_H
+#define STRINGS_H
+#include <string>
 
-class Line {
+class Strings {
 protected:
-    const char* text;
+    std::string str;
+
 public:
-    Line(const char* t);
-    virtual ~Line();
-    const char* getText();
-    virtual int getLength();
-    virtual void sortText(char* result);
+    explicit Strings(const std::string& s);
+    virtual ~Strings() = default;
+
+    virtual int calculateLength() const = 0;
+    virtual void sortString() = 0;
+    std::string getStr() const;
 };
 
-class UpperLine : public Line {
+class UpperCaseString : public Strings {
 public:
-    UpperLine(const char* t);
-    int getLength() override;
-    void sortText(char* result) override;
+    explicit UpperCaseString(const std::string& s);
+    int calculateLength() const override;
+    void sortString() override;
 };
 
-class LowerLine : public Line {
+class LowerCaseString : public Strings {
 public:
-    LowerLine(const char* t);
-    int getLength() override;
-    void sortText(char* result) override;
+    explicit LowerCaseString(const std::string& s);
+    int calculateLength() const override;
+    void sortString() override;
 };
 
-#endif
+#endif 

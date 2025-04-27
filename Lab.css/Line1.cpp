@@ -1,54 +1,37 @@
-#include "Line.h"
-#include <cstring>
-#include <cctype>
+#include "Strings.h"
 #include <algorithm>
+#include <cctype>
 
-Line::Line(const char* t) {
-    text = t;
+using namespace std; 
+// Базовий клас
+Strings::Strings(const string& s) : str(s) {}
+
+string Strings::getStr() const {
+    return str;
 }
 
-Line::~Line() {}
-
-const char* Line::getText() {
-    return text;
+// UpperCaseString
+UpperCaseString::UpperCaseString(const string& s) : Strings(s) {
+    for (auto& c : str) c = toupper(c); 
 }
 
-int Line::getLength() {
-    return strlen(text);
+int UpperCaseString::calculateLength() const {
+    return str.length();
 }
 
-void Line::sortText(char* result) {
-    strcpy(result, text);
-    std::sort(result, result + strlen(result));
+void UpperCaseString::sortString() {
+    sort(str.begin(), str.end()); 
 }
 
-UpperLine::UpperLine(const char* t) : Line(t) {}
-
-int UpperLine::getLength() {
-    return strlen(text);
+// LowerCaseString
+LowerCaseString::LowerCaseString(const string& s) : Strings(s) {
+    for (auto& c : str) c = tolower(c); 
 }
 
-void UpperLine::sortText(char* result) {
-    int len = strlen(text);
-    for (int i = 0; i < len; i++) {
-        result[i] = std::toupper(text[i]);
-    }
-    result[len] = '\0';
-    std::sort(result, result + len);
+int LowerCaseString::calculateLength() const {
+    return str.length();
 }
 
-LowerLine::LowerLine(const char* t) : Line(t) {}
-
-int LowerLine::getLength() {
-    return strlen(text);
-}
-
-void LowerLine::sortText(char* result) {
-    int len = strlen(text);
-    for (int i = 0; i < len; i++) {
-        result[i] = std::tolower(text[i]);
-    }
-    result[len] = '\0';
-    std::sort(result, result + len);
-    std::reverse(result, result + len);
+void LowerCaseString::sortString() {
+    sort(str.rbegin(), str.rend()); 
 }
