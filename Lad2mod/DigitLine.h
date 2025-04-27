@@ -17,4 +17,4 @@ public:
     float DigitRatio() const;
 };
 
-#endif // DIGITLINE_H
+#endif 

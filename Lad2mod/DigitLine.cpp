@@ -1,8 +1,7 @@
 #include "DigitLine.h"
 using namespace std;
 
-DigitLine::DigitLine()
-    : value("")
+DigitLine::DigitLine() : value("")
 {}
 
 DigitLine::DigitLine(const string& text)
